@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: crt-config
+  namespace: docker-registry
+  labels:
+    app: registry
+
+data:
+  REGISTRY_CRT: "/root/Registry/certs/registry.crt"
