@@ -4,6 +4,7 @@ mkdir certs auth
 openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout certs/registry.key -out certs/registry.crt -subj "/CN=my-registry.com"
 docker run --rm --entrypoint htpasswd httpd:2 -Bbn myuser mypasswd > auth/htpasswd
 k create ns "docker-registry"
+If you get error while creating secret tls check ownership of those crt and key file
 kubectl create secret tls docker-registry-tls-cert -n docker-registry --cert=/root/Registry/certs/registry.crt --key=/root/Registry/certs/registry.key
 k get secret -n "docker-registry"
 k describe secret docker-registry-tls-cert -n "docker-registry"
