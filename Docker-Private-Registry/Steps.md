@@ -68,6 +68,14 @@ Edit the Docker Daemon Configuration: On each client machine, update /etc/docker
 
 Restart the Docker Daemon
 
+Edit the config.toml file and do the below entries on all the server
+
+[plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+  [plugins."io.containerd.grpc.v1.cri".registry.mirrors."my-registry:30222"]
+    endpoint = ["http://my-registry:30222"]
+
+Restart the Containerd
+
 sudo systemctl restart docker
 
 Now try to do login docker from any of the worker node
