@@ -49,7 +49,10 @@ Copy the content and add in to the all nodes in below path
 
 Now update the certificates on all nodes
 
-sudo update-ca-certificates
+sudo update-ca-certificates     (For Ubuntu)
+
+sudo update-ca-trust enable     (RHEL 9)
+sudo update-ca-trust extract
 
 Then create the below file on all the servers and copy the same registry.crt content in it
 
@@ -97,13 +100,11 @@ cd /var/lib/registry
 ls -lrth
 exit
 
-Now just do the deployment by using this image which is pushed in registry
+Now just do the deployment by using this image which is pushed in the registry
 
-new.yaml
+Now create one more secrete for docker registry in the same namespace where your pod is actually going to deploy, so while do the deployment it will authenticate that you are authenticate user
 
-Now create one more secrete for docker registry so while do the deployment it will authenticate that you are authenticate useer
-
-kubectl create secret docker-registry nginx-secret --docker-server=my-registry:5015 --docker-username=myuser --docker-password=mypasswd
+kubectl create secret docker-registry nginx-secret --docker-server=my-registry:5015 --docker-username=myuser --docker-password=mypasswd -n namespacename
 
 k apply -f  new.yaml
 
